@@ -15,7 +15,7 @@ class Post(models.Model):
     post_title = models.CharField(max_length = 200, verbose_name='Название поста', unique=True)
     post_text = models.TextField(verbose_name='Текст поста')
     post_date = models.DateTimeField(verbose_name='Дата и время написания поста', auto_now_add=True)
-    post_autor = models.CharField(max_length = 25, verbose_name='Автор поста')
+    post_author = models.CharField(max_length = 25, verbose_name='Автор поста')
     post_tags = models.ManyToManyField(Tag, verbose_name='Теги поста')
 
 class Comment(models.Model):

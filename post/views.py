@@ -6,5 +6,5 @@ from post.models import Post, Comment, Tag
 
 def list_posts(request):
     listofposts = Post.objects.all()
-    return render_to_response('index.html', {'listofposts': listofposts[0]})
+    return render_to_response('index.html', {'listofposts': listofposts})
 

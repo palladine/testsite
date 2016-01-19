@@ -7,7 +7,13 @@
 <body>
     <div class="one"></div>
     <div class="two">
-        {{listofposts}}
+        {% for post in listofposts %}
+          {{post.post_title}}
+          {{post.post_text}}
+          {{post.post_date}}
+          {{post.post_author}}
+          {{post.post_tags}}
+        {% endfor %}
     </div>
     <div class="three"></div>
 </body>
