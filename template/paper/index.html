@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <title>Блог</title>
+</head>
+<body>
+    <div class='blog'> 
+     <div class='title'>Название блога</div>
+     <div class='menu'>
+        <ul class="listmenu">
+         <a href='/'><li>Главная</li></a>
+         <a href='#'><li>пункт 2</li></a>
+         <a href='#'><li>пункт 3</li></a>
+         <a href='#'><li>пункт 4</li></a>
+         <a href='#'><li>пункт 5</li></a>
+        </ul>
+     </div>
+
+     <div class="content">
+      <div class="post">
+        {% for recpost in listofposts %}
+           <div class="posttitle">{{recpost.post_title}}</div>
+           <div class="posttext">{{recpost.post_text}}</div>
+           <div class="postdate">{{recpost.post_date|date:'d F Yг. [H:i:s]'}}</div>
+           <div class="postauthor">{{recpost.post_author}}</div>
+          
+          {% for name in recpost.post_tags.all %}
+             <div class="posttags">
+                 <ul>
+                    <li><a href="/post/{{name.tag}}">{{name.tag}}</a></li>{% if not forloop.last %}, {% endif %}
+                 </ul>
+             </div>
+          {% endfor %}
+
+        {% endfor %}
+      </div>
+      <div class='tags'>Теги</div>
+     </div>
+     <div class='footer'>Студия веб-разработки "Studio". 2016г.</div>
+   </div>
+
+</body>
+</html>
