@@ -9,11 +9,13 @@
         {% for post in listofposts %}
            <div class="posttitle">{{post.post_title}}</div>
            <div class="posttext">{{post.post_text}}</div>
-           <div class="postdate">{{post.post_date}}</div>
+           <div class="postdate">{{post.post_date|date:'d F Yг. [H:i:s]'}}</div>
            <div class="postauthor">{{post.post_author}}</div>
 
           {% for n in post.post_tags.all %}
-             <div class="posttags"><a href="#">{{n.tag}}</a>,</div>
+             <div class="posttags"><a href="#">{{n.tag}}</a>
+                 {% if not forloop.last %}, {% endif %}
+             </div>
           {% endfor %}
 
         {% endfor %}
