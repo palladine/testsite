@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from post.views import list_posts
+from post.views import list_posts, filterbytag
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', list_posts),
+    url(r'^post/(?P<filter_by_tag>\w+)/$', filterbytag),
 ]

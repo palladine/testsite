@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>!!!blog!!!</title>
 </head>
 <body>
     <div class="post">
-        {% for post in listofposts %}
-           <div class="posttitle">{{post.post_title}}</div>
-           <div class="posttext">{{post.post_text}}</div>
-           <div class="postdate">{{post.post_date|date:'d F Yг. [H:i:s]'}}</div>
-           <div class="postauthor">{{post.post_author}}</div>
-
-          {% for n in post.post_tags.all %}
-             <div class="posttags"><a href="#">{{n.tag}}</a>
-                 {% if not forloop.last %}, {% endif %}
+        {% for recpost in listofposts %}
+           <div class="posttitle">{{recpost.post_title}}</div>
+           <div class="posttext">{{recpost.post_text}}</div>
+           <div class="postdate">{{recpost.post_date|date:'d F Yг. [H:i:s]'}}</div>
+           <div class="postauthor">{{recpost.post_author}}</div>
+          
+          {% for name in recpost.post_tags.all %}
+             <div class="posttags">
+                 <ul>
+                    <li><a href="/post/{{name.tag}}">{{name.tag}}</a></li>{% if not forloop.last %}, {% endif %}
+                 </ul>
              </div>
           {% endfor %}
 
