@@ -7,15 +7,15 @@
 <body>
     <div class="post">
         {% for post in listofposts %}
-           <div class="postitle">{{post.post_title}}</div>
+           <div class="posttitle">{{post.post_title}}</div>
            <div class="posttext">{{post.post_text}}</div>
-           <div class="date">{{post.post_date}}</div>
-           <div class="author">{{post.post_author}}</div>
-          
+           <div class="postdate">{{post.post_date}}</div>
+           <div class="postauthor">{{post.post_author}}</div>
+
           {% for n in post.post_tags.all %}
-             <div class="tags"><a href="#">{{n.tag}}</a>,</div>
+             <div class="posttags"><a href="#">{{n.tag}}</a>,</div>
           {% endfor %}
-        
+
         {% endfor %}
     </div>
 </body>
