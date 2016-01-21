@@ -20,23 +20,21 @@
      </div>
 
      <div class="content">
-      <div class="post">
         {% for recpost in listofposts %}
+        <div class="post">  
+           <div class="postdate">{{recpost.post_date|date:'d F Yг. [H:i:s]'}}</div>
            <div class="posttitle">{{recpost.post_title}}</div>
            <div class="posttext">{{recpost.post_text}}</div>
-           <div class="postdate">{{recpost.post_date|date:'d F Yг. [H:i:s]'}}</div>
-           <div class="postauthor">{{recpost.post_author}}</div>
-          
-          {% for name in recpost.post_tags.all %}
-             <div class="posttags">
-                 <ul>
-                    <li><a href="/post/{{name.tag}}">{{name.tag}}</a></li>{% if not forloop.last %}, {% endif %}
-                 </ul>
-             </div>
-          {% endfor %}
-
+           <div class="posttags">
+              <ul>
+                {% for name in recpost.post_tags.all %}
+                     <li><a href="/post/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %} ,  {% endif %}</li>
+                {% endfor %}
+              </ul>
+           </div>
+           <div class="postauthor">Автор поста: {{recpost.post_author}}</div>
+        </div>    
         {% endfor %}
-      </div>
       <div class='tags'>Теги</div>
      </div>
      <div class='footer'>Студия веб-разработки "Studio". 2016г.</div>
