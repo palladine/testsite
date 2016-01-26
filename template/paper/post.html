@@ -1,0 +1,14 @@
+{% extends 'paper/base.html' %}
+{% block content %}    
+    <p>{{ postfull.post_date }}</p>
+    <h2>{{ postfull.post_title }}</h2>
+    <p>{{ postfull.post_text }}</p>
+    <p>{{ postfull.post_author}}</p>
+    
+    <ul>
+     {% for name in postfull.post_tags.all %}
+            <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
+     {% endfor %}
+    </ul>
+
+{% endblock %}

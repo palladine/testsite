@@ -7,6 +7,8 @@ class Tag(models.Model):
         verbose_name_plural = 'Теги'
     tag = models.CharField(max_length = 15, verbose_name='Тег', unique=True)
 
+    def __str__(self):
+        return self.tag
 
 class Post(models.Model):
     class Meta():
@@ -18,7 +20,8 @@ class Post(models.Model):
     post_author = models.CharField(max_length = 25, verbose_name='Автор поста')
     post_tags = models.ManyToManyField(Tag, verbose_name='Теги')
 
-
+    def __str__(self):
+        return '%s #%s' % (self.post_title, self.post_author)
 
 class Comment(models.Model):
     comment_text = models.TextField(verbose_name='Текст комментария')

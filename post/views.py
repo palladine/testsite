@@ -8,9 +8,11 @@ def list_posts(request):
     listofposts = Post.objects.all()
     return render_to_response('paper/index.html', {'listofposts': listofposts})
 
-def filterbytag(request, filter_by_tag):
-    print (filter_by_tag)
-#    for n in Post.post_tags:
-#     print (n)
-    fbt = '123'
-    return render_to_response('paper/index.html', {'listofposts': fbt})
+def postbyid(request, post_id):
+    fieldstopost = Post.objects.get(id=post_id)
+    return render_to_response('paper/post.html', {'postfull': fieldstopost})
+
+def postsbytag(request, tag_name):
+    tag = Tag.objects.select_related().get(tag=tag_name)
+    postsoftag = tag.post_set.all()
+    return render_to_response('paper/tags.html', {'selecttag': tag, 'postsoftag': postsoftag})

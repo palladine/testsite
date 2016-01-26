@@ -1,12 +1,13 @@
 {% extends 'paper/base.html' %}
 {% block content %}
-    {% for p in listofposts %}
-        <h2><a href="post/{{ p.id }}">{{ p.post_title }}</a></h2>
+    <h2> {{ selecttag }} </h2>
+    {% for t in postsoftag %}
+        <h2><a href="post/{{ t.id }}">{{ t.post_title }}</a></h2>
         <p></p>
-        <p>{{ p.post_author }}</p>
+        <p>{{ t.post_author }}</p>
 
         <ul>
-         {% for name in p.post_tags.all %}
+         {% for name in t.post_tags.all %}
             <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
          {% endfor %}
         </ul>
