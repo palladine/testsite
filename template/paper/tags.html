@@ -2,7 +2,7 @@
 {% block content %}
     <h2> {{ selecttag }} </h2>
     {% for t in postsoftag %}
-        <h2><a href="post/{{ t.id }}">{{ t.post_title }}</a></h2>
+        <h2><a href="/post/{{ t.id }}">{{ t.post_title }}</a></h2>
         <p></p>
         <p>{{ t.post_author }}</p>
 
