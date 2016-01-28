@@ -3,7 +3,7 @@
 <h2> {{ postsoftag|length }} постов с тегом {{ selecttag }} </h2>
     {% for t in postsoftag %}
         <h2><a href="/post/{{ t.id }}">{{ t.post_title }}</a></h2>
-        <p></p>
+        <p>{{ t.post_text|truncatewords:15}} <a href="/post/{{ t.id }}">читать далее</a></p>
         <p>{{ t.post_author }}</p>
 
         <ul>
