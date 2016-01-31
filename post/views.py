@@ -4,7 +4,7 @@ from post.models import Post, Comment, Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-# Create your views here.
+# TODO Function of pagination
 
 def list_posts(request):
     getlistofposts = Post.objects.all()

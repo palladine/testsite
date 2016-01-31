@@ -16,7 +16,8 @@
         {% empty %}
     <p>Нет постов</p>
     {% endfor %}
-<p>
+    
+    <p>
     {% if postsoftag.has_previous %}
       <a href="?page={{ postsoftag.previous_page_number }}">назад</a>
     {% endif %}
