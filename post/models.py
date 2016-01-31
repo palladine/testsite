@@ -14,6 +14,7 @@ class Post(models.Model):
     class Meta():
         verbose_name = 'Посты'
         verbose_name_plural = 'Посты'
+        ordering = ['-post_date']
     post_title = models.CharField(max_length = 200, verbose_name='Название поста', unique=True)
     post_text = models.TextField(verbose_name='Текст поста')
     post_date = models.DateTimeField(verbose_name='Дата и время написания поста', auto_now_add=True)

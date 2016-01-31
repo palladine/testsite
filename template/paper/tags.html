@@ -1,8 +1,9 @@
 {% extends 'paper/base.html' %}
 {% block content %}
-<h2> {{ postsoftag|length }} постов с тегом {{ selecttag }} </h2>
+<h2> Найдено {{ getposts|length }} постов с тегом {{ selecttag }} </h2>
     {% for t in postsoftag %}
         <h2><a href="/post/{{ t.id }}">{{ t.post_title }}</a></h2>
+        <p>{{ t.post_date|date:"j F Y [H:i]" }}</p>
         <p>{{ t.post_text|truncatewords:15}} <a href="/post/{{ t.id }}">читать далее</a></p>
         <p>{{ t.post_author }}</p>
 
@@ -15,4 +16,16 @@
         {% empty %}
     <p>Нет постов</p>
     {% endfor %}
+<p>
+    {% if postsoftag.has_previous %}
+      <a href="?page={{ postsoftag.previous_page_number }}">назад</a>
+    {% endif %}
+    
+    [ {{ postsoftag.number }} / {{ postsoftag.paginator.num_pages }} ]
+    
+    {% if postsoftag.has_next %}
+      <a href="?page={{ postsoftag.next_page_number }}">вперед</a>
+    {% endif %}
+    </p>
+
 {% endblock %}

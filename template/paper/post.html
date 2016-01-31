@@ -1,9 +1,9 @@
 {% extends 'paper/base.html' %}
 {% block content %}    
-    <p>{{ postfull.post_date }}</p>
+    <p>{{ postfull.post_date|date:"j F Y [H:i]" }}</p>
     <h2>{{ postfull.post_title }}</h2>
     <p>{{ postfull.post_text }}</p>
-    <p>{{ postfull.post_author}}</p>
+    <p>{{ postfull.post_author }}</p>
     
     <ul>
      {% for name in postfull.post_tags.all %}

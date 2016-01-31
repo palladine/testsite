@@ -2,7 +2,8 @@
 {% block content %}
     {% for p in listofposts %}
         <h2><a href="/post/{{ p.id }}">{{ p.post_title }}</a></h2>
-        <p>{{ p.post_text|truncatewords:15}} <a href="/post/{{ p.id }}">читать далее</a></p>
+        <p>{{p.post_date|date:"j F Y [H:i]" }}</p>
+        <p>{{ p.post_text|truncatewords:15 }} <a href="/post/{{ p.id }}">читать далее</a></p>
         <p>{{ p.post_author }}</p>
 
         <ul>
@@ -14,4 +15,15 @@
         {% empty %}
     <p>Нет постов</p>
     {% endfor %}
+    <p>
+    {% if listofposts.has_previous %}
+      <a href="?page={{ listofpost.previous_page_number }}">назад</a>
+    {% endif %}
+    
+    [ {{ listofposts.number }} / {{ listofposts.paginator.num_pages }} ]
+    
+    {% if listofposts.has_next %}
+      <a href="?page={{ listofposts.next_page_number }}">вперед</a>
+    {% endif %}
+    </p>
 {% endblock %}
