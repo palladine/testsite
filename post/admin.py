@@ -6,9 +6,14 @@ from post.models import Tag, Post, Comment
 #class TagAdmin(admin.ModelAdmin):
 #    list_display = ('tag',)
 
-#class PostAdmin(admin.ModelAdmin):
-#    list_display = ('post_title',)
+class CommentsInLine(admin.StackedInline):
+    model = Comment
+    extra = 2
 
-admin.site.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_filter = ('post_date',)
+    inlines = [CommentsInLine,]
+
+admin.site.register(Post, PostAdmin)
 admin.site.register(Tag)
 
