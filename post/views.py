@@ -8,7 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def list_posts(request):
     getlistofposts = Post.objects.all()
-    paginator = Paginator(getlistofposts, 1)
+    paginator = Paginator(getlistofposts, 10)
     page = request.GET.get('page')
     try:
         listofposts = paginator.page(page)
@@ -22,14 +22,15 @@ def list_posts(request):
 
 def postbyid(request, post_id):
     fieldstopost = Post.objects.get(id=post_id)
-    return render_to_response('paper/post.html', {'postfull': fieldstopost})
+    commentsofpost = Comment.objects.filter(comment_post_id=post_id)
+    return render_to_response('paper/post.html', {'postfull': fieldstopost, 'commentsofpost': commentsofpost})
 
 
 
 def postsbytag(request, tag_name):
     tag = Tag.objects.select_related().get(tag=tag_name)
     getposts = tag.post_set.all()
-    paginator = Paginator(getposts, 1)
+    paginator = Paginator(getposts, 10)
     page = request.GET.get('page')
     try:
         postsoftag = paginator.page(page)

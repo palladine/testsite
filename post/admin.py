@@ -15,5 +15,6 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [CommentsInLine,]
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Comment)
 admin.site.register(Tag)
 
