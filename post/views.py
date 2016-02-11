@@ -16,14 +16,17 @@ def list_posts(request):
         listofposts = paginator.page(1)
     except EmptyPage:
         listofposts = paginator.page(paginator.num_pages)
-    return render_to_response('paper/index.html', {'listofposts': listofposts})
+
+    return render_to_response('paper/index.html', 
+            {'listofposts': listofposts})
 
 
 
 def postbyid(request, post_id):
     fieldstopost = Post.objects.get(id=post_id)
     commentsofpost = Comment.objects.filter(comment_post_id=post_id)
-    return render_to_response('paper/post.html', {'postfull': fieldstopost, 'commentsofpost': commentsofpost})
+    return render_to_response('paper/post.html', 
+            {'postfull': fieldstopost, 'commentsofpost': commentsofpost})
 
 
 

@@ -3,20 +3,26 @@
     <p>{{ postfull.post_date|date:"j F Y [H:i]" }}</p>
     <h2>{{ postfull.post_title }}</h2>
     <p>{{ postfull.post_text }}</p>
-    <p>{{ postfull.post_author }}</p>
+    <p>Автор поста: {{ postfull.post_author }}</p>
        
     <p>
-      Комментарии
-      {% for comment in commentsofpost %}
-       {{ comment.comment_date }}
-       {{ comment.comment_text }}
-       {{ comment.comment_author }}
-      {% endfor %}
+      {% if commentsofpost %}
+        Комментарии
+        {% for comment in commentsofpost %}
+         <p>{{ comment.comment_date }}</p>
+         <p>{{ comment.comment_text }}</p>
+         <p>{{ comment.comment_author }}</p>
+        {% endfor %}
+      {% else %}
+        Комментариев нет
+      {% endif %}
     </p>
-    <ul>
-     {% for name in postfull.post_tags.all %}
+    
+    <p>Теги: 
+     <ul>
+      {% for name in postfull.post_tags.all %}
        <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
-     {% endfor %}
-    </ul>
-
+      {% endfor %}
+     </ul>
+    </p> 
 {% endblock %}
