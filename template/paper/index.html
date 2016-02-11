@@ -3,7 +3,7 @@
     {% for p in listofposts %}
         <h2><a href="/post/{{ p.id }}">{{ p.post_title }}</a></h2>
         <p>{{p.post_date|date:"j F Y [H:i]" }}</p>
-        <p>{{ p.post_text|truncatewords:15 }} <a href="/post/{{ p.id }}">читать далее</a></p>
+        <p>{{ p.post_text|truncatechars:230 }} <a href="/post/{{ p.id }}">читать далее</a></p>
         <p>Автор поста: {{ p.post_author }}</p>
 
         <p>
