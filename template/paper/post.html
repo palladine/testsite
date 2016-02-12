@@ -14,9 +14,9 @@
     </p> 
     
     <div>
-     {{ marker }}
      <form action='/post/{{ postfull.id }}/' method='post'>
         {% csrf_token %} 
+        {{ marker }}
         <p>Автор комментария: {{ commentform.comment_author }}</p>
         <p>Текст комментария: {{ commentform.comment_text }}</p>
         <p><input type="submit" value='Добавить'></p>
