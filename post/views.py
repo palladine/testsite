@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import render_to_response
 from post.models import Post, Comment, Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from post.forms import CommentForm
+from django.template import RequestContext
 
 # TODO Function of pagination
 
@@ -25,8 +26,22 @@ def list_posts(request):
 def postbyid(request, post_id):
     fieldstopost = Post.objects.get(id=post_id)
     commentsofpost = Comment.objects.filter(comment_post_id=post_id)
+    form = CommentForm()
+    marker = ''
+    if request.POST:
+      form = CommentForm(request.POST)
+      if form.is_valid():
+          onecom = form.save(commit=False)
+          onecom.comment_post = Post.objects.get(id=post_id)
+          form.save()
+          marker = 'Комментарий добавлен'
+          return redirect('/post/%s/' % post_id)
     return render_to_response('paper/post.html', 
-            {'postfull': fieldstopost, 'commentsofpost': commentsofpost})
+            {'postfull': fieldstopost, 
+             'commentsofpost': commentsofpost,
+             'commentform': form,
+             'marker': marker},
+             context_instance=RequestContext(request, processors=[]))
 
 
 

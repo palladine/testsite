@@ -4,19 +4,6 @@
     <h2>{{ postfull.post_title }}</h2>
     <p>{{ postfull.post_text }}</p>
     <p>Автор поста: {{ postfull.post_author }}</p>
-       
-    <p>
-      {% if commentsofpost %}
-        Комментарии
-        {% for comment in commentsofpost %}
-         <p>{{ comment.comment_date }}</p>
-         <p>{{ comment.comment_text }}</p>
-         <p>{{ comment.comment_author }}</p>
-        {% endfor %}
-      {% else %}
-        Комментариев нет
-      {% endif %}
-    </p>
     
     <p>Теги: 
      <ul>
@@ -25,4 +12,27 @@
       {% endfor %}
      </ul>
     </p> 
+    
+    <div>
+     {{ marker }}
+     <form action='/post/{{ postfull.id }}/' method='post'>
+        {% csrf_token %} 
+        <p>Автор комментария: {{ commentform.comment_author }}</p>
+        <p>Текст комментария: {{ commentform.comment_text }}</p>
+        <p><input type="submit" value='Добавить'></p>
+     </form>
+    </div>
+
+    <p>
+      {% if commentsofpost %}
+        Комментарии
+        {% for comment in commentsofpost %}
+         <p>{{ comment.comment_date|date:"j.m.Y [H:i]" }} {{ comment.comment_author }}</p>
+         <p>{{ comment.comment_text }}</p>
+        {% endfor %}
+      {% else %}
+        Комментариев нет
+      {% endif %}
+    </p>
+
 {% endblock %}
