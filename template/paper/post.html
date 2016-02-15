@@ -1,4 +1,5 @@
 {% extends 'paper/base.html' %}
+{% load bootstrap3 %}
 
 <div class='container'>
 
@@ -11,24 +12,20 @@
     
     <div class='row'>
          <div class='col-md-12'>
-         <div class='tags'>
-          <ul>
+          <ul class='list-inline list-unstyled'>
            Теги:    
            {% for name in postfull.post_tags.all %}
              <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
            {% endfor %}
           </ul>
          </div>
-         </div>
     </div>
 
-        
     <div>
-     <form action='/post/{{ postfull.id }}/' method='post'>
-        {% csrf_token %} 
-        <p>Автор комментария: {{ commentform.comment_author }}</p>
-        <p>Текст комментария: {{ commentform.comment_text }}</p>
-        <p><input type="submit" value='Добавить'></p>
+     <form action='/post/{{ postfull.id }}/' method='post' class='form'>
+         {% csrf_token %} 
+         <div class='controls'>{% bootstrap_form commentform %}</div>
+         <button type="submit" class="btn btn-default">Добавить</button>
      </form>
     </div>
 

@@ -13,14 +13,14 @@
 
          <div class='row'>
          <div class='col-md-12'>
-         <div class='tags'>
-          <ul>
+
+          <ul class='list-inline list-unstyled'>
            Теги:    
            {% for name in t.post_tags.all %}
              <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
            {% endfor %}
           </ul>
-         </div>
+         
          </div>
          </div>
     
