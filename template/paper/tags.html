@@ -1,4 +1,8 @@
 {% extends 'paper/base.html' %}
+
+
+<div class='container'>
+
 {% block content %}
 <h2> Найдено {{ getposts|length }} постов с тегом {{ selecttag }} </h2>
     {% for t in postsoftag %}
@@ -7,14 +11,20 @@
         <p>{{ t.post_text|truncatechars:230}} <a href="/post/{{ t.id }}">читать далее</a></p>
         <p>Автор поста: {{ t.post_author }}</p>
 
-        <p>Теги :
-         <ul>
-          {% for name in t.post_tags.all %}
-            <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
-          {% endfor %}
-         </ul>
-        </p>
-        {% empty %}
+         <div class='row'>
+         <div class='col-md-12'>
+         <div class='tags'>
+          <ul>
+           Теги:    
+           {% for name in t.post_tags.all %}
+             <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
+           {% endfor %}
+          </ul>
+         </div>
+         </div>
+         </div>
+    
+    {% empty %}
     <p>Нет постов</p>
     {% endfor %}
     
@@ -23,11 +33,17 @@
       <a href="?page={{ postsoftag.previous_page_number }}">назад</a>
     {% endif %}
     
-    [ {{ postsoftag.number }} / {{ postsoftag.paginator.num_pages }} ]
-    
+     {% if postsoftag.paginator.num_pages == 1 %}
+       <p></p>
+     {% else %}
+      [ {{ postsoftag.number }} / {{ postsoftag.paginator.num_pages }} ]
+     {% endif %}
+
     {% if postsoftag.has_next %}
       <a href="?page={{ postsoftag.next_page_number }}">вперед</a>
     {% endif %}
     </p>
 
 {% endblock %}
+
+</div>

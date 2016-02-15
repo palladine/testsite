@@ -1,22 +1,31 @@
 {% extends 'paper/base.html' %}
+
+<div class='container'>
+
 {% block content %}    
     <p>{{ postfull.post_date|date:"j F Y [H:i]" }}</p>
     <h2>{{ postfull.post_title }}</h2>
     <p>{{ postfull.post_text }}</p>
     <p>Автор поста: {{ postfull.post_author }}</p>
     
-    <p>Теги: 
-     <ul>
-      {% for name in postfull.post_tags.all %}
-       <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
-      {% endfor %}
-     </ul>
-    </p> 
     
+    <div class='row'>
+         <div class='col-md-12'>
+         <div class='tags'>
+          <ul>
+           Теги:    
+           {% for name in postfull.post_tags.all %}
+             <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
+           {% endfor %}
+          </ul>
+         </div>
+         </div>
+    </div>
+
+        
     <div>
      <form action='/post/{{ postfull.id }}/' method='post'>
         {% csrf_token %} 
-        {{ marker }}
         <p>Автор комментария: {{ commentform.comment_author }}</p>
         <p>Текст комментария: {{ commentform.comment_text }}</p>
         <p><input type="submit" value='Добавить'></p>
@@ -36,3 +45,5 @@
     </p>
 
 {% endblock %}
+
+</div>

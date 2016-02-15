@@ -1,4 +1,7 @@
 {% extends 'paper/base.html' %}
+
+<div class="container">
+
 {% block content %}
     {% for p in listofposts %}
         <h2><a href="/post/{{ p.id }}">{{ p.post_title }}</a></h2>
@@ -8,31 +11,48 @@
 
         <p>
         {% if p.comment_set.count > 0 %}
-         Комментарии: {{ p.comment_set.count }}</p> 
+         Комментарии: {{ p.comment_set.count }} 
         {% else %}
          Комментариев нет
         {% endif %}
-        
-        <p>Теги: 
-         <ul>
-          {% for name in p.post_tags.all %}
-            <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
-          {% endfor %}
-         </ul>
         </p>
+
+        <div class='row'>
+         <div class='col-md-12'>
+         <div class='tags'>
+          <ul>
+           Теги:    
+           {% for name in p.post_tags.all %}
+             <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
+           {% endfor %}
+          </ul>
+         </div>
+         </div>
+         </div>
 
         {% empty %}
     <p>Нет постов</p>
     {% endfor %}
-    <p>
-    {% if listofposts.has_previous %}
-      <a href="?page={{ listofpost.previous_page_number }}">назад</a>
-    {% endif %}
     
-    [ {{ listofposts.number }} / {{ listofposts.paginator.num_pages }} ]
+    <div class='row'>
+      <div class='col-md-12'>
+       {% if listofposts.has_previous %}
+         <a href="?page={{ listofpost.previous_page_number }}">назад</a>
+       {% endif %}
+        
+        {% if listofposts.paginator.num_pages == 1 %}
+          <p></p>
+        {% else %}
+          [ {{ listofposts.number }} / {{ listofposts.paginator.num_pages }} ]
+        {% endif %}
     
-    {% if listofposts.has_next %}
-      <a href="?page={{ listofposts.next_page_number }}">вперед</a>
-    {% endif %}
-    </p>
+       {% if listofposts.has_next %}
+         <a href="?page={{ listofposts.next_page_number }}">вперед</a>
+       {% endif %}
+      </div>
+     </div>
+
 {% endblock %}
+
+
+</div>

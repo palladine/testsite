@@ -1,4 +1,33 @@
-<p><a href='/'>Главная</a></p>
-{% block content %}
- Empty page
-{% endblock %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+     <a href='/'>Главная</a>
+    </div>
+    
+    <div class="row">
+     {% block menu %}
+      Меню
+     {% endblock %}
+    </div>
+    
+    <div class="row">
+     <div class="col-md-12">
+       {% block content %}
+         Нет постов для отображения
+       {% endblock %}
+     </div>    
+    </div>
+    <div class="row"></div>
+  </div> 
+</body>
+</html>
