@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from post.views import list_posts, postbyid, postsbytag
 
@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^$', list_posts),
     url(r'^post/(?P<post_id>\d+)/$', postbyid),
     url(r'^tags/(?P<tag_name>\w+)/$', postsbytag),
+    url(r'^summernote/', include('django_summernote.urls')),
 ]

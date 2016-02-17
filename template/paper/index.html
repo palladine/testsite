@@ -3,12 +3,11 @@
 <div class="container">
 
 {% block content %}
-    {% for p in listofposts %}
+    {% for p in listofposts %}   
         <h2><a href="/post/{{ p.id }}">{{ p.post_title }}</a></h2>
         <p>{{p.post_date|date:"j F Y [H:i]" }}</p>
-        <p>{{ p.post_text|truncatechars:230 }} <a href="/post/{{ p.id }}">читать далее</a></p>
+        <p>{{ p.post_text|truncatechars_html:230|safe }} <a href="/post/{{ p.id }}">читать далее</a></p>
         <p>Автор поста: {{ p.post_author }}</p>
-
         <p>
         {% if p.comment_set.count > 0 %}
          Комментарии: {{ p.comment_set.count }} 
@@ -20,7 +19,7 @@
         <div class='row'>
          <div class='col-md-12'>
           <ul class='list-inline list-unstyled'>
-           Теги:    
+             Теги:
            {% for name in p.post_tags.all %}
              <li><a href="/tags/{{name.tag}}">{{name.tag}}</a>{% if not forloop.last %},  {% endif %}</li>
            {% endfor %}

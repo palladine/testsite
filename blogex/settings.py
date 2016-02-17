@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'post',
     'bootstrap3',
+    'django_summernote',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -120,5 +121,65 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticforweb')
+
+MEDIA_URL = '/media/'
+
+
+SUMMERNOTE_CONFIG = {
+    # Using SummernoteWidget - iframe mode
+    'iframe': True,  # or set False to use SummernoteInplaceWidget - no iframe mode
+
+    # Using Summernote Air-mode
+    'airMode': True,
+
+    # Use native HTML tags (`<b>`, `<i>`, ...) instead of style attributes
+    # (Firefox, Chrome only)
+    'styleWithTags': True,
+
+    # Set text direction : 'left to right' is default.
+    'direction': 'ltr',
+
+    # Change editor size
+    'width': '100%',
+    'height': '480',
+
+    # Use proper language setting automatically (default)
+    # Or, set editor language/locale forcely
+    #'lang': 'ru-RU',
+    'lang': 'ru-RU',
+     
+    # Customize toolbar buttons
+    #'toolbar': [
+    #    ['style', ['style']],
+    #    ['style', ['bold', 'italic', 'underline', 'clear']],
+    #    ['para', ['ul', 'ol', 'height']],
+    #    ['insert', ['link']],
+    #],
+
+    'attachment_filesize_limit': 4000 * 4000,
+
+    # Need authentication while uploading attachments.
+    #'attachment_require_authentication': True,
+
+    # Set `upload_to` function for attachments.
+    #'attachment_upload_to': my_custom_upload_to_func(),
+    'attachment_upload_to': os.path.join(BASE_DIR, 'media/uploads_img/'),
+    # Set custom storage class for attachments.
+    #'attachment_storage_class': 'my.custom.storage.class.name',
+
+    # Set custom model for attachments (default: 'django_summernote.Attachment')
+    #'attachment_model': 'my.custom.attachment.model', # must inherit 'django_summernote.AbstractAttachment'
+
+    # Set external media files for SummernoteInplaceWidget.
+    # !!! Be sure to put {{ form.media }} in template before initiate summernote.
+    #'inplacewidget_external_css': (                                             
+    #    '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css',      
+    #    '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css',
+    #),                                                                          
+    #'inplacewidget_external_js': (                                              
+    #    '//code.jquery.com/jquery-1.9.1.min.js',                                
+    #    '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js',        
+    #),
+}

@@ -24,7 +24,7 @@ class Post(models.Model):
     post_tags = models.ManyToManyField(Tag, verbose_name='Теги')
 
     def __str__(self):
-        return '%s #%s' % (self.post_title, self.post_author)
+        return '%s [Автор: %s]' % (self.post_title, self.post_author)
 
 class Comment(models.Model):
     class Meta():
@@ -36,6 +36,9 @@ class Comment(models.Model):
     comment_post = models.ForeignKey(Post, verbose_name='Комментарии')
     comment_date = models.DateTimeField(verbose_name='Дата и время написания комментария', auto_now_add=True)
     comment_author = models.CharField(max_length = 25, verbose_name='Автор комментария')
+ 
+    def __str__(self):
+        return '%s [Автор: %s]' % (self.comment_date, self.comment_author) 
 
 
 
