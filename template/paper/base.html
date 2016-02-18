@@ -11,17 +11,17 @@
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
+   <div class="navbar navbar-default">
+   <div class="container">
     <div class="row">
-     <a href='/'>Главная</a>
+        {% block menu %}
+        <a href='/'>Главная</a>
+        {% endblock %}
     </div>
-    
-    <div class="row">
-     {% block menu %}
-      Меню
-     {% endblock %}
-    </div>
-    
+   </div>
+   </div>    
+   
+   <div class="container"> 
     <div class="row">
      <div class="col-md-12">
        {% block content %}

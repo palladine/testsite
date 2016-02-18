@@ -1,6 +1,5 @@
 from django.contrib import admin
 from post.models import Tag, Post, Comment
-from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
 
@@ -15,7 +14,7 @@ class CommentsInLine(admin.StackedInline):
     model = Comment
     extra = 2
 
-class PostAdmin(SummernoteModelAdmin):
+class PostAdmin(admin.ModelAdmin):
     list_filter = ('post_date', 'post_author')
     inlines = [CommentsInLine,]
 

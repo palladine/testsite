@@ -1,4 +1,6 @@
 from django.db import models
+from ckeditor.fields import RichTextField 
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 class Tag(models.Model):
@@ -18,7 +20,7 @@ class Post(models.Model):
         verbose_name_plural = 'Посты'
         ordering = ['-post_date']
     post_title = models.CharField(max_length = 200, verbose_name='Название поста', unique=True)
-    post_text = models.TextField(verbose_name='Текст поста')
+    post_text = RichTextUploadingField(verbose_name='Текст поста')
     post_date = models.DateTimeField(verbose_name='Дата и время написания поста', auto_now_add=True)
     post_author = models.CharField(max_length = 25, verbose_name='Автор поста')
     post_tags = models.ManyToManyField(Tag, verbose_name='Теги')
